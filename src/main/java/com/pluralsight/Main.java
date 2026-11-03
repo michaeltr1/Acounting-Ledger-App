@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -31,9 +32,10 @@ public class Main {
             userChoiceHome = read.nextLine();
 
             switch (userChoiceHome) {
-                case "D" -> System.out.println("Deposit Selected");
-
-                case "P" -> System.out.println(" Payment Menu Selected");
+                //This is add deposits
+                case "D" -> addTransactions(true);
+                //This is make payments
+                case "P" -> addTransactions(false);
 
                 case "L" -> ledgerPage();
 
@@ -43,6 +45,7 @@ public class Main {
             }
         }
     }
+
 
     //Ledger page choice
     public static void ledgerPage() {
@@ -59,9 +62,32 @@ public class Main {
             ledgerPageChoice = read.nextLine();
 
             switch (ledgerPageChoice) {
-                case "A" -> System.out.println("Displaying all Entries");
-                case "D" -> System.out.println("Displaying Deposits into Accounts");
-                case "P" -> System.out.println("Displaying Payments/Negative Entries");
+                case "A" -> {
+                    ArrayList<Transactions> all = readTransactions();
+                    Collections.reverse(all);
+                    for (Transactions t : all) {
+                        System.out.println(t);
+                    }
+                }
+                case "D" -> {
+                    ArrayList<Transactions> all = readTransactions();
+                    Collections.reverse(all);
+                    for (Transactions t : all) {
+                        if (t.getAmount() > 0) {
+                            System.out.println(t);
+                        }
+                    }
+                }
+                case "P" -> {
+                    ArrayList<Transactions> all = readTransactions();
+                    Collections.reverse(all);
+                    for (Transactions t : all) {
+                        if (t.getAmount() < 0) {
+                            System.out.println(t);
+                        }
+                    }
+                }
+
                 case "R" -> System.out.println("Displaying Custom Search and Pre Defined Reports");
                 case "H" -> System.out.println("Back to Home Screen");
 
@@ -98,8 +124,11 @@ public class Main {
         }
         return readTransactions;
     }
-
 }
+
+
+
+
 
 
 
