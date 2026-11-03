@@ -1,9 +1,16 @@
 package com.pluralsight;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Main {
     public static Scanner read = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         //Home Screen User Choice Screen
@@ -28,7 +35,7 @@ public class Main {
 
                 case "P" -> System.out.println(" Payment Menu Selected");
 
-                case "L" -> System.out.println("Display Ledger Selected");
+                case "L" -> ledgerPage();
 
                 case "X" -> System.out.println("Exit Application Selected");
 
@@ -36,11 +43,12 @@ public class Main {
             }
         }
     }
+
     //Ledger page choice
     public static void ledgerPage() {
         String ledgerPageChoice = "";
-        while(ledgerPage(){
-            System.out.println("Ledger Page Chosen");
+        while (!ledgerPageChoice.equalsIgnoreCase("H")) {
+            System.out.println("---Ledger Page---");
 
             System.out.println("Enter A: Display all Entries");
             System.out.println("Enter D: Display Only Deposits into Account");
@@ -50,7 +58,7 @@ public class Main {
             System.out.println("Enter Your Choice: ");
             ledgerPageChoice = read.nextLine();
 
-            switch(ledgerPageChoice) {
+            switch (ledgerPageChoice) {
                 case "A" -> System.out.println("Displaying all Entries");
                 case "D" -> System.out.println("Displaying Deposits into Accounts");
                 case "P" -> System.out.println("Displaying Payments/Negative Entries");
@@ -60,13 +68,42 @@ public class Main {
             }
 
         }
+    }
 
+    // Reading our CSV
+    public static ArrayList<Transactions> readTransactions() {
+        ArrayList<Transactions> readTransactions = new ArrayList<>();
 
+        try {
+            FileReader fileReader = new FileReader("transactions.csv");
+            BufferedReader reader = new BufferedReader(fileReader);
 
+            reader.readLine();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] partsOfFile = line.split("\\|");
+
+                LocalDate date = LocalDate.parse(partsOfFile[0]);
+                LocalTime time = LocalTime.parse(partsOfFile[1]);
+                String description = partsOfFile[2];
+                String vendor = partsOfFile[3];
+                double amount = Double.parseDouble(partsOfFile[4]);
+
+                readTransactions.add(new Transactions(date, time, description, vendor, amount));
+                reader.close();
             }
+        } catch (IOException e) {
+            System.out.println("Error Reading Files");
+        }
+        return readTransactions;
+    }
+}
 
 
-            }
+
+
+
 
 
 
