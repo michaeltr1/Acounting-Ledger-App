@@ -34,18 +34,40 @@ public class Main {
 
                 default -> System.out.println("Invalid Input. Re-Enter Correct Variable");
             }
-
-    public static void ledgerPage() {
-        String ledgerPage;
-
-
-
-            }
-
-
-            }
-
-
-
         }
     }
+    //Ledger page choice
+    public static void ledgerPage() {
+        String ledgerPageChoice = "";
+        while(ledgerPage(){
+            System.out.println("Ledger Page Chosen");
+
+            System.out.println("Enter A: Display all Entries");
+            System.out.println("Enter D: Display Only Deposits into Account");
+            System.out.println("Enter P: Display Payments/Negative Entries");
+            System.out.println("Enter R: Display Pre-Define Reports/Custom Search");
+            System.out.println("Enter H: Back to Home Menu");
+            System.out.println("Enter Your Choice: ");
+            ledgerPageChoice = read.nextLine();
+
+            switch(ledgerPageChoice) {
+                case "A" -> System.out.println("Displaying all Entries");
+                case "D" -> System.out.println("Displaying Deposits into Accounts");
+                case "P" -> System.out.println("Displaying Payments/Negative Entries");
+                case "R" -> System.out.println("Displaying Custom Search and Pre Defined Reports");
+                case "H" -> System.out.println("Back to Home Screen");
+
+            }
+
+        }
+
+
+
+            }
+
+
+            }
+
+
+
+
