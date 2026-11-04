@@ -87,8 +87,7 @@ public class Main {
                         }
                     }
                 }
-
-                case "R" -> System.out.println("Displaying Custom Search and Pre Defined Reports");
+                case "R" -> reportsPage();
                 case "H" -> System.out.println("Back to Home Screen");
 
             }
