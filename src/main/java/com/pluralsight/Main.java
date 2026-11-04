@@ -1,9 +1,7 @@
 package com.pluralsight;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -127,8 +125,10 @@ public class Main {
         return readTransactions;
     }
 
-        // Line 36/38 Add Transactions for userHomeChoice
-        public static void addDeposit(){
+
+    // Line 36/38 Add Transactions for userHomeChoice
+
+    public static void addDeposit() {
         //To Format Date,Time,Description,Vendor,Amount in homepage for deposits
         //Computer knows date so no input
         LocalDate date = LocalDate.now();
@@ -146,28 +146,84 @@ public class Main {
 
         transactionAmount = Math.abs(transactionAmount);
 
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"));
+
+            writer.write(String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, transactionAmount));
+            writer.close();
+            System.out.println("Saved Deposit.");
+        } catch (IOException e) {
+            System.out.println("Error Entering Deposit");
+
+
+        }
         //Line 38 Add Transaction for userHomeChoice
         //For Payments exactly same just adding negative
+    }
+
+    public static void addPayment() {
+        //To Format Date,Time,Description,Vendor,Amount in homepage for deposits
+        //Computer knows date so no input
+        LocalDate date = LocalDate.now();
+        String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.println("Enter Description");
+        String description = read.nextLine();
+
+        System.out.println("Enter Vendor");
+        String vendor = read.nextLine();
+
+        //Format for $ Amount
+        System.out.println("Enter Amount of Payment: ");
+        // pasrseDouble into the Variable amount
+        double transactionAmount = Double.parseDouble(read.nextLine());
+
+
+        transactionAmount = -Math.abs(transactionAmount);
+        //Same as for Deposits Just Payments
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"));
+
+            writer.write(String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, transactionAmount));
+            writer.close();
+            System.out.println("Saved Payment.");
+        } catch (IOException e) {
+            System.out.println("Error Entering Payment");
         }
 
-public static void addPayment() {
-    //To Format Date,Time,Description,Vendor,Amount in homepage for deposits
-    //Computer knows date so no input
-    LocalDate date = LocalDate.now();
-    String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-    System.out.println("Enter Description");
-    String description = read.nextLine();
 
-    System.out.println("Enter Vendor");
-    String vendor = read.nextLine();
 
-    //Format for $ Amount
-    System.out.println("Enter Amount of Payment: ");
-    // pasrseDouble into the Variable amount
-    double transactionAmount = Double.parseDouble(read.nextLine());
 
-    transactionAmount = -Math.abs(transactionAmount);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Creating Reports Page for Specific Searches
+        public static void reportsPage(){
+            String reportSearchChoice = ""
+            while(true);
+            System.out.println("---Reports Page---");
+            System.out.println("Enter 1: Month");
+            System.out.println("Enter 2:");
+
+        }
+
+
+
+
+
+
+
+    }
 }
 
 
