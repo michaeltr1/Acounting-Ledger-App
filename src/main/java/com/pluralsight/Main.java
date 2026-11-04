@@ -1,9 +1,12 @@
 package com.pluralsight;
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -33,9 +36,9 @@ public class Main {
 
             switch (userChoiceHome) {
                 //This is add deposits
-                case "D" -> addTransactions(true);
+                case "D" -> addDeposit();
                 //This is make payments
-                case "P" -> addTransactions(false);
+                case "P" -> addPayment();
 
                 case "L" -> ledgerPage();
 
@@ -116,14 +119,59 @@ public class Main {
                 double amount = Double.parseDouble(partsOfFile[4]);
 
                 readTransactions.add(new Transactions(date, time, description, vendor, amount));
-                reader.close();
             }
+            reader.close();
         } catch (IOException e) {
             System.out.println("Error Reading Files");
         }
         return readTransactions;
     }
+
+        // Line 36/38 Add Transactions for userHomeChoice
+        public static void addDeposit(){
+        //To Format Date,Time,Description,Vendor,Amount in homepage for deposits
+        //Computer knows date so no input
+        LocalDate date = LocalDate.now();
+        String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        System.out.println("Enter Description");
+        String description = read.nextLine();
+
+        System.out.println("Enter Vendor");
+        String vendor = read.nextLine();
+
+        //Format for $ Amount
+        System.out.println("Enter Amount of Deposit: ");
+        // pasrseDouble into the Variable amount
+        double transactionAmount = Double.parseDouble(read.nextLine());
+
+        transactionAmount = Math.abs(transactionAmount);
+
+        //Line 38 Add Transaction for userHomeChoice
+        //For Payments exactly same just adding negative
+        }
+
+public static void addPayment() {
+    //To Format Date,Time,Description,Vendor,Amount in homepage for deposits
+    //Computer knows date so no input
+    LocalDate date = LocalDate.now();
+    String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    System.out.println("Enter Description");
+    String description = read.nextLine();
+
+    System.out.println("Enter Vendor");
+    String vendor = read.nextLine();
+
+    //Format for $ Amount
+    System.out.println("Enter Amount of Payment: ");
+    // pasrseDouble into the Variable amount
+    double transactionAmount = Double.parseDouble(read.nextLine());
+
+    transactionAmount = -Math.abs(transactionAmount);
 }
+}
+
+
+
 
 
 
