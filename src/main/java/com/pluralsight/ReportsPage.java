@@ -35,38 +35,77 @@ public class ReportsPage {
             }
         }
     }
-        //print entries for month & year
-        private static void monthtoDate () {
-            ArrayList<Transactions> currentTransactions = transactions();
-            //loads csv
-            Collections.reverse(currentTransactions);
-            //todays date
-            LocalDate today = LocalDate.now();
-            //going through list
-            for (Transactions t: currentTransactions) {
+
+    //print entries for month & year
+    private static void monthtoDate() {
+        ArrayList<Transactions> currentTransactions = transactions();
+        //loads csv
+        Collections.reverse(currentTransactions);
+        //todays date
+        LocalDate today = LocalDate.now();
+        //going through list
+        for (Transactions t : currentTransactions) {
+            if (t.getDate().getMonthValue() == today.getMonthValue()) {
                 if (t.getDate().getYear() == today.getYear()) {
-                        System.out.println(t);
-                    }
+                    System.out.println(t);
                 }
-
             }
-
-
-        private static void vendor () {
-        }
-
-        private static void previousYear () {
-
-        }
-
-        private static void yearToDate () {
-
-        }
-
-        private static void previousMonth () {
         }
     }
 
+    private static void previousMonth() {
+        //load transaction list below
+        ArrayList<Transactions> currentTransactions = transactions();
+        Collections.reverse(currentTransactions);
+        LocalDate monthLast = LocalDate.now().minusMonths(1);
+        for (Transactions t : currentTransactions) {
+            if (t.getDate().getMonthValue() == monthLast.getMonthValue()) {
+                if (t.getDate().getYear() == monthLast.getYear()) {
+                    System.out.println(t);
+
+                }
+            }
+        }
+    }
+
+
+
+
+    private static void yearToDate () {
+        ArrayList<Transactions> currentTransactions = transactions();
+        Collections.reverse(currentTransactions);
+        LocalDate currentDate = LocalDate.now();
+        for (Transactions t : currentTransactions) {
+            if (t.getDate().getYear() == currentDate.getYear()) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    private static void previousYear () {
+        ArrayList<Transactions> currentTransactions = transactions();
+        Collections.reverse(currentTransactions);
+        int prevYear = LocalDate.now().getYear() - 1;
+        for (Transactions t : currentTransactions) {
+            if (t.getDate().getYear() == prevYear) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    private static void vendor() {
+        System.out.println("Enter vendor: ");
+        String vendorInput = read.nextLine();
+        ArrayList<Transactions> currentTransactions = transactions();
+        Collections.reverse(currentTransactions);
+        for (Transactions t: currentTransactions) {
+        if (t.getVendor().equalsIgnoreCase(vendorInput)) {
+            System.out.println(t);
+
+                }
+            }
+        }
+    }
 
 
 
