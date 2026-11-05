@@ -64,14 +64,14 @@ public class Main {
 
             switch (ledgerPageChoice) {
                 case "A" -> {
-                    ArrayList<Transactions> all = readTransactions();
+                    ArrayList<Transactions> all = transactions();
                     Collections.reverse(all);
                     for (Transactions t : all) {
                         System.out.println(t);
                     }
                 }
                 case "D" -> {
-                    ArrayList<Transactions> all = readTransactions();
+                    ArrayList<Transactions> all = transactions();
                     Collections.reverse(all);
                     for (Transactions t : all) {
                         if (t.getAmount() > 0) {
@@ -80,7 +80,7 @@ public class Main {
                     }
                 }
                 case "P" -> {
-                    ArrayList<Transactions> all = readTransactions();
+                    ArrayList<Transactions> all = transactions();
                     Collections.reverse(all);
                     for (Transactions t : all) {
                         if (t.getAmount() < 0) {
@@ -97,8 +97,8 @@ public class Main {
     }
 
     // Reading our CSV
-    public static ArrayList<Transactions> readTransactions() {
-        ArrayList<Transactions> readTransactions = new ArrayList<>();
+    public static ArrayList<Transactions> transactions() {
+        ArrayList<Transactions> transactions = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader("transactions.csv");
@@ -116,13 +116,13 @@ public class Main {
                 String vendor = partsOfFile[3];
                 double amount = Double.parseDouble(partsOfFile[4]);
 
-                readTransactions.add(new Transactions(date, time, description, vendor, amount));
+                transactions.add(new Transactions(date, time, description, vendor, amount));
             }
             reader.close();
         } catch (IOException e) {
             System.out.println("Error Reading Files");
         }
-        return readTransactions;
+        return transactions;
     }
 
 
@@ -192,30 +192,31 @@ public class Main {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Creating Reports Page for Specific Searches
-        public static void reportsPage(){
-            String reportSearchChoice = ""
-            while(true);
+        public static void reportsPage () {
+            String reportSearchChoice = "";
+            while (true) ;
             System.out.println("---Reports Page---");
             System.out.println("Enter 1: Month");
-            System.out.println("Enter 2:");
+            System.out.println("Enter 2: Previous Month");
+            System.out.println("Enter 3: Year to Date");
+            System.out.println("Enter 4: Previous Year");
+            System.out.println("Enter 5: Search Vendors");
+            System.out.println("Enter X: Leave Reports Page");
+            System.out.println("Enter Input: ");
+            reportSearchChoice = read.nextLine();
 
+            switch (reportSearchChoice) {
+                case "1" -> monthtoDate();
+                case "2" -> previousMonth();
+                case "3" -> yearToDate();
+                case "4" -> previousYear();
+                case "5" -> vendor();
+                case "X" -> System.out.println("Back to Ledger");
+
+            }
         }
+    }
 
 
 
