@@ -11,14 +11,14 @@ public class ReportsPage {
     public static void reportsPage() {
         String reportSearchChoice = "";
 
-        while (!reportSearchChoice.equals("X")) {
+        while (!reportSearchChoice.equals("0")) {
             System.out.println("---Reports Page---");
             System.out.println("Enter 1: Month");
             System.out.println("Enter 2: Previous Month");
             System.out.println("Enter 3: Year to Date");
             System.out.println("Enter 4: Previous Year");
             System.out.println("Enter 5: Search Vendors");
-            System.out.println("Enter X: Leave Reports Page");
+            System.out.println("Enter 0: Leave Reports Page");
             System.out.println("Enter Input: ");
             reportSearchChoice = read.nextLine();
 
@@ -28,7 +28,7 @@ public class ReportsPage {
                 case "3" -> yearToDate();
                 case "4" -> previousYear();
                 case "5" -> vendor();
-                case "X" -> System.out.println("Back to Ledger");
+                case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("Bad Input Re-Enter Information");
 
 
@@ -101,6 +101,7 @@ public class ReportsPage {
         for (Transactions t: currentTransactions) {
         if (t.getVendor().equalsIgnoreCase(vendorInput)) {
             System.out.println(t);
+
 
                 }
             }

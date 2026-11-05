@@ -91,6 +91,7 @@ public class Main {
                     }
                 }
                 case "R" -> reportsPage();
+
                 case "H" -> System.out.println("Back to Home Screen");
 
             }
@@ -105,8 +106,6 @@ public class Main {
         try {
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader reader = new BufferedReader(fileReader);
-
-            reader.readLine();
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -150,9 +149,9 @@ public class Main {
 
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"));
-
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
             writer.write(String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, transactionAmount));
+            writer.newLine();
             writer.close();
             System.out.println("Saved Deposit.");
         } catch (IOException e) {
@@ -184,9 +183,10 @@ public class Main {
         transactionAmount = -Math.abs(transactionAmount);
         //Same as for Deposits Just Payments
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
 
             writer.write(String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, transactionAmount));
+            writer.newLine();
             writer.close();
             System.out.println("Saved Payment.");
         } catch (IOException e) {
