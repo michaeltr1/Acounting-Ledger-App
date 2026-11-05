@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import static com.pluralsight.ReportsPage.reportsPage;
+
 
 public class Main {
     public static Scanner read = new Scanner(System.in);
@@ -192,40 +194,9 @@ public class Main {
         }
 
 
-        //Creating Reports Page for Specific Searches
-        public static void reportsPage () {
-            String reportSearchChoice = "";
-            while (true) ;
-            System.out.println("---Reports Page---");
-            System.out.println("Enter 1: Month");
-            System.out.println("Enter 2: Previous Month");
-            System.out.println("Enter 3: Year to Date");
-            System.out.println("Enter 4: Previous Year");
-            System.out.println("Enter 5: Search Vendors");
-            System.out.println("Enter X: Leave Reports Page");
-            System.out.println("Enter Input: ");
-            reportSearchChoice = read.nextLine();
-
-            switch (reportSearchChoice) {
-                case "1" -> monthtoDate();
-                case "2" -> previousMonth();
-                case "3" -> yearToDate();
-                case "4" -> previousYear();
-                case "5" -> vendor();
-                case "X" -> System.out.println("Back to Ledger");
 
             }
         }
-    }
-
-
-
-
-
-
-
-    }
-}
 
 
 
